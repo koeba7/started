@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\KategoriController;
+use App\Http\Controllers\Admin\JenisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,20 @@ Route::prefix('admin/kategori')
     ->name('admin.kategori.')
     ->middleware('cekLevel:1 2')
     ->controller(KategoriController::class)
+    ->group(function () {
+        Route::get('/', 'read')->name('read');
+        Route::get('/add', 'add')->name('add');
+        Route::post('/create', 'create')->name('create');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/delete/{id}', 'delete')->name('delete');
+    });
+
+// Jenis
+Route::prefix('admin/jenis')
+    ->name('admin.jenis.')
+    ->middleware('cekLevel:1 2')
+    ->controller(JenisController::class)
     ->group(function () {
         Route::get('/', 'read')->name('read');
         Route::get('/add', 'add')->name('add');
