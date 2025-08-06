@@ -123,7 +123,7 @@
 					<div class="bar" id="bar1"></div>
 				</div>
 				<div class="percent" id="percent1">0%</div>
-				<div class="loading-text">Loading...</div>
+				<div class="loading-text">Tunggu dih...</div>
 			</div>
 		</div>
 		@endif
@@ -358,25 +358,37 @@
 				</div>
 			</div>
 			<div class="menu-block customscroll">
-				<div class="sidebar-menu">
-					<ul id="accordion-menu">
-						<li>
-							<a href="/admin/home" class="dropdown-toggle no-arrow @if ($activePage == 'dashboard') active @endif">
-								<span class="micon bi bi-house"></span><span class="mtext">Dashboard</span>
-							</a>
-						</li>
-						<li class="dropdown">
-							<a href="javascript:;" class="dropdown-toggle">
-								<span class="micon dw dw-file"></span><span class="mtext">Data Master</span>
-							</a>
-							<ul class="submenu">
-								<li><a href="/admin/kategori" class="@if ($activePage == 'kategori') active @endif">Data Kategori</a></li>
-								<li><a href="/admin/jenis" class="@if ($activePage == 'jenis') active @endif">Data Jenis</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
+    <div class="sidebar-menu">
+        <ul id="accordion-menu">
+            <li>
+                <a href="/admin/home" class="dropdown-toggle no-arrow @if ($activePage == 'dashboard') active @endif">
+                    <span class="micon bi bi-house"></span><span class="mtext">Dashboard</span>
+                </a>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:;" class="dropdown-toggle">
+                    <span class="micon dw dw-file"></span><span class="mtext">Data Master</span>
+                </a>
+                <ul class="submenu">
+                    <li><a href="/admin/kategori" class="@if ($activePage == 'kategori') active @endif">Data Kategori</a></li>
+                    <li><a href="/admin/jenis" class="@if ($activePage == 'jenis') active @endif">Data Jenis</a></li>
+                    <li><a href="/admin/metode_pembayaran" class="@if ($activePage == 'metode_pembayaran') active @endif">Data Metode Pembayaran</a></li>
+                    <li><a href="/admin/barang" class="@if ($activePage == 'barang') active @endif">Data Barang</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/admin/pemasukan" class="dropdown-toggle no-arrow @if ($activePage == 'pemasukan') active @endif">
+                    <span class="micon bi bi-bar-chart-line"></span><span class="mtext">Data Pemasukan</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/pengeluaran" class="dropdown-toggle no-arrow @if ($activePage == 'pengeluaran') active @endif">
+                    <span class="micon bi bi-wallet2"></span><span class="mtext">Data Pengeluaran</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
 		</div>
 		<div class="mobile-menu-overlay"></div>
 

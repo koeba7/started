@@ -7,6 +7,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\JenisController;
+use App\Http\Controllers\Admin\MetodePembayaranController;
+use App\Http\Controllers\Admin\PemasukanController;
+use App\Http\Controllers\Admin\PengeluaranController;
+use App\Http\Controllers\Admin\BarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +68,62 @@ Route::prefix('admin/jenis')
     ->name('admin.jenis.')
     ->middleware('cekLevel:1 2')
     ->controller(JenisController::class)
+    ->group(function () {
+        Route::get('/', 'read')->name('read');
+        Route::get('/add', 'add')->name('add');
+        Route::post('/create', 'create')->name('create');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/delete/{id}', 'delete')->name('delete');
+    });
+
+// Metode Pembayaran
+Route::prefix('admin/metode_pembayaran')
+    ->name('admin.metode_pembayaran.')
+    ->middleware('cekLevel:1 2')
+    ->controller(MetodePembayaranController::class)
+    ->group(function () {
+        Route::get('/', 'read')->name('read');
+        Route::get('/add', 'add')->name('add');
+        Route::post('/create', 'create')->name('create');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/delete/{id}', 'delete')->name('delete');
+    });
+
+// Pemasukan
+Route::prefix('admin/pemasukan')
+    ->name('admin.pemasukan.')
+    ->middleware('cekLevel:1 2')
+    ->controller(PemasukanController::class)
+    ->group(function () {
+        Route::get('/', 'read')->name('read');
+        Route::get('/add', 'add')->name('add');
+        Route::post('/create', 'create')->name('create');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/delete/{id}', 'delete')->name('delete');
+    });
+
+// Pengeluaran
+Route::prefix('admin/pengeluaran')
+    ->name('admin.pengeluaran.')
+    ->middleware('cekLevel:1 2')
+    ->controller(PengeluaranController::class)
+    ->group(function () {
+        Route::get('/', 'read')->name('read');
+        Route::get('/add', 'add')->name('add');
+        Route::post('/create', 'create')->name('create');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/delete/{id}', 'delete')->name('delete');
+    });
+
+// Barang
+Route::prefix('admin/barang')
+    ->name('admin.barang.')
+    ->middleware('cekLevel:1 2')
+    ->controller(BarangController::class)
     ->group(function () {
         Route::get('/', 'read')->name('read');
         Route::get('/add', 'add')->name('add');

@@ -11,7 +11,7 @@ use DatePeriod;
 use DateInterval;
 use DateTime;
 use Carbon\Carbon;
-
+ 
 class HomeController extends Controller
 {
     public function __construct()
@@ -20,8 +20,29 @@ class HomeController extends Controller
     }
     
     public function index()
-    {
-        return view('admin.dashboard.index');
+    { 
+
+        // Ambil data ringkasan keuangan
+        $totalPemasukan = DB::table('pemasukan')->sum('total');
+        $totalPengeluaran = DB::table('pengeluaran')->sum('total');
+        $saldo = $totalPemasukan - $totalPengeluaran;
+        
+        // Data untuk chart (7 hari terakhir)
+        $pemasukanHarian = DB::table('pemasukan')
+            ->select(DB::raw('DATE(tanggal) as tanggal'), DB::raw('SUM(total) as total'))
+            ->where('tanggal', '>=', now()->subDays(7))
+            ->groupBy('tanggal')
+            ->orderBy('tanggal')
+            ->get();
+            
+        $pengeluaranHarian = DB::table('pengeluaran')
+            ->select(DB::raw('DATE(tanggal) as tanggal'), DB::raw('SUM(total) as total'))
+            ->where('tanggal', '>=', now()->subDays(7))
+            ->groupBy('tanggal')
+            ->orderBy('tanggal')
+            ->get();
+        
+        return view('admin.dashboard.index', compact('totalPemasukan', 'totalPengeluaran', 'saldo', 'pemasukanHarian', 'pengeluaranHarian'));
     }
 
     public function change()
