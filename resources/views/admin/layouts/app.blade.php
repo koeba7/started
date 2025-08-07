@@ -373,8 +373,12 @@
                     <li><a href="/admin/kategori" class="@if ($activePage == 'kategori') active @endif">Data Kategori</a></li>
                     <li><a href="/admin/jenis" class="@if ($activePage == 'jenis') active @endif">Data Jenis</a></li>
                     <li><a href="/admin/metode_pembayaran" class="@if ($activePage == 'metode_pembayaran') active @endif">Data Metode Pembayaran</a></li>
-                    <li><a href="/admin/barang" class="@if ($activePage == 'barang') active @endif">Data Barang</a></li>
                 </ul>
+            </li>
+			<li>
+                <a href="/admin/barang" class="dropdown-toggle no-arrow @if ($activePage == 'barang') active @endif">
+                    <span class="micon bi bi-archive"></span><span class="mtext">Data Barang</span>
+                </a>
             </li>
             <li>
                 <a href="/admin/pemasukan" class="dropdown-toggle no-arrow @if ($activePage == 'pemasukan') active @endif">
