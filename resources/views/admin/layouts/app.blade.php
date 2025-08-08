@@ -384,7 +384,7 @@
 						</li>
 						<li>
 							<a href="{{ url('/admin/barang') }}" class="dropdown-toggle no-arrow {{ $activePage == 'barang' ? 'active' : '' }}">
-								<span class="micon dw dw-box"></span>
+								<span class="micon dw dw-notepad-2"></span>
 								<span class="mtext">Barang</span>
 							</a>	
 						</li>
@@ -399,14 +399,10 @@
 								<span class="micon dw dw-shopping-cart"></span><span class="mtext">Pengeluaran</span>
 							</a>
 						</li>
-						<li class="dropdown">
-							<a href="javascript:;" class="dropdown-toggle">
+						<li>
+							<a href="/admin/transaksi" class="dropdown-toggle no-arrow @if ($activePage == 'transaksi') active @endif">
 								<span class="micon dw dw-shopping-bag"></span><span class="mtext">Transaksi</span>
 							</a>
-							<ul class="submenu">
-								<li><a href="/admin/transaksi" class="@if ($activePage == 'transaksi') active @endif">Data Transaksi</a></li>
-								<li><a href="/admin/detail-transaksi" class="@if ($activePage == 'detail_transaksi') active @endif">Detail Transaksi</a></li>
-							</ul>
 						</li>
 						
 					</ul>

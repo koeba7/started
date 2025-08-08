@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\PengeluaranController;
 use App\Http\Controllers\Admin\BarangController;
 use App\Http\Controllers\Admin\MetodeController;
 use App\Http\Controllers\Admin\TransaksiController;
-use App\Http\Controllers\Admin\DetailTransaksiController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -164,16 +164,3 @@ Route::prefix('admin/transaksi')
         Route::get('/delete/{id}', 'delete')->name('delete');
     });
 
-// Detail Transaksi
-Route::prefix('admin/detail-transaksi')
-    ->name('admin.detail_transaksi.')
-    ->middleware('cekLevel:1 2')
-    ->controller(DetailTransaksiController::class)
-    ->group(function () {
-        Route::get('/', 'read')->name('read');
-        Route::get('/add', 'add')->name('add');
-        Route::post('/create', 'create')->name('create');
-        Route::get('/edit/{id}', 'edit')->name('edit');
-        Route::post('/update/{id}', 'update')->name('update');
-        Route::get('/delete/{id}', 'delete')->name('delete');
-    });

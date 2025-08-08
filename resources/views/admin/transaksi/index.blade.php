@@ -120,19 +120,21 @@
          </button>
       </div>
       @endif
-             <table class="table table-striped table-bordered data-table hover">
+      @if (session('info'))
+      <div class="alert alert-info">
+         {{ session('info')}}
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+      @endif
+                           <table class="table table-striped table-bordered data-table hover">
           <thead class="bg-primary text-white">
              <tr>
                 <th width="5%" >#</th>
                 <th>Tanggal</th>
-                <th>Pukul</th>
                 <th>Nama Pelanggan</th>
-                <th>Contact</th>
-                <th>Metode</th>
                 <th>Total</th>
-                <th>Potongan</th>
-                <th>Bayar</th>
-                <th>Kembali</th>
                 <th>Status</th>
                 <th class="table-plus datatable-nosort text-center">Action</th>
              </tr>
@@ -142,15 +144,9 @@
              @foreach($transaksi as $data)
              <tr>
                 <td class="text-center">{{$no++}}</td>
-                <td>{{date('d/m/Y', strtotime($data->tanggal))}}</td>
-                <td>{{$data->pukul}}</td>
+                <td>{{date('d/m/Y', strtotime($data->tanggal))}} {{$data->pukul}}</td>
                 <td>{{$data->nama}}</td>
-                <td>{{$data->contact}}</td>
-                <td>{{$data->nama_metode}}</td>
                 <td>Rp {{number_format($data->total, 0, ',', '.')}}</td>
-                <td>Rp {{number_format($data->potongan, 0, ',', '.')}}</td>
-                <td>Rp {{number_format($data->bayar, 0, ',', '.')}}</td>
-                <td>Rp {{number_format($data->kembali, 0, ',', '.')}}</td>
                 <td>
                    @if($data->status == 'pending')
                       <span class="badge badge-warning">Pending</span>
@@ -160,7 +156,8 @@
                       <span class="badge badge-danger">Cancelled</span>
                    @endif
                 </td>
-                <td class="text-center" width="15%">
+                <td class="text-center" width="20%">
+                   <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#detail-{{$data->id}}"><i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="Lihat Detail"></i></button>
                    <a href="/admin/transaksi/edit/{{$data->id}}"><button class="btn btn-success btn-xs"><i class="fa fa-edit" data-toggle="tooltip" data-placement="top" title="Edit Data"></i></button></a>
                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#data-{{$data->id}}"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="Delete Data"></i></button>
                 </td>
@@ -203,6 +200,130 @@
                   <button type="button" class="btn btn-danger btn-block" data-dismiss="modal" aria-label="Close">Tidak</button>
                </div>
             </div>
+         </div>
+      </div>
+   </div>
+</div>
+@endforeach
+
+<!-- Modal Detail Transaksi -->
+@foreach($transaksi as $data)
+<div class="modal fade" id="detail-{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="detailModalLabel">Detail Transaksi - {{$data->nama}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+                   <div class="modal-body">
+             <div class="row">
+                <div class="col-md-12">
+                   <h5 class="text-primary mb-3"><i class="fa fa-info-circle"></i> Informasi Transaksi</h5>
+                   <div class="row">
+                      <div class="col-md-6">
+                         <table class="table table-borderless">
+                            <tr>
+                               <td width="30%"><strong>Tanggal & Waktu</strong></td>
+                               <td>: {{date('d/m/Y', strtotime($data->tanggal))}} - {{$data->pukul}}</td>
+                            </tr>
+                            <tr>
+                               <td><strong>Nama Pelanggan</strong></td>
+                               <td>: {{$data->nama}}</td>
+                            </tr>
+                            <tr>
+                               <td><strong>Contact</strong></td>
+                               <td>: {{$data->contact}}</td>
+                            </tr>
+                            <tr>
+                               <td><strong>Metode Pembayaran</strong></td>
+                               <td>: {{$data->nama_metode}}</td>
+                            </tr>
+                            <tr>
+                               <td><strong>Status</strong></td>
+                               <td>: 
+                                  @if($data->status == 'pending')
+                                     <span class="badge badge-warning">Pending</span>
+                                  @elseif($data->status == 'completed')
+                                     <span class="badge badge-success">Completed</span>
+                                  @else
+                                     <span class="badge badge-danger">Cancelled</span>
+                                  @endif
+                               </td>
+                            </tr>
+                         </table>
+                      </div>
+                      <div class="col-md-6">
+                         <table class="table table-borderless">
+                            <tr>
+                               <td width="30%"><strong>Total Transaksi</strong></td>
+                               <td>: <span class="text-primary font-weight-bold">Rp {{number_format($data->total, 0, ',', '.')}}</span></td>
+                            </tr>
+                            <tr>
+                               <td><strong>Potongan</strong></td>
+                               <td>: Rp {{number_format($data->potongan, 0, ',', '.')}}</td>
+                            </tr>
+                            <tr>
+                               <td><strong>Bayar</strong></td>
+                               <td>: Rp {{number_format($data->bayar, 0, ',', '.')}}</td>
+                            </tr>
+                            <tr>
+                               <td><strong>Kembali</strong></td>
+                               <td>: Rp {{number_format($data->kembali, 0, ',', '.')}}</td>
+                            </tr>
+                         </table>
+                      </div>
+                   </div>
+                </div>
+             </div>
+            
+                         <hr>
+             <h5 class="text-success mb-3"><i class="fa fa-shopping-cart"></i> Detail Item Transaksi</h5>
+             <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                   <thead class="bg-success text-white">
+                      <tr>
+                         <th width="5%">No</th>
+                         <th width="40%">Nama Barang</th>
+                         <th width="10%" class="text-center">Jumlah</th>
+                         <th width="15%" class="text-right">Harga Satuan</th>
+                         <th width="15%" class="text-right">Diskon</th>
+                         <th width="15%" class="text-right">Total</th>
+                      </tr>
+                   </thead>
+                   <tbody>
+                      @php
+                         $detail_items = DB::table('detail_transaksi')
+                            ->join('barang', 'detail_transaksi.id_barang', '=', 'barang.id')
+                            ->where('detail_transaksi.id_transaksi', $data->id)
+                            ->select('detail_transaksi.*', 'barang.nama as nama_barang')
+                            ->get();
+                         $no_detail = 1;
+                         $total_items = 0;
+                      @endphp
+                      @foreach($detail_items as $item)
+                      <tr>
+                         <td class="text-center">{{$no_detail++}}</td>
+                         <td><strong>{{$item->nama_barang}}</strong></td>
+                         <td class="text-center">{{$item->jumlah}}</td>
+                         <td class="text-right">Rp {{number_format($item->harga, 0, ',', '.')}}</td>
+                         <td class="text-right">Rp {{number_format($item->diskon, 0, ',', '.')}}</td>
+                         <td class="text-right"><strong>Rp {{number_format($item->total, 0, ',', '.')}}</strong></td>
+                      </tr>
+                      @php $total_items += $item->total; @endphp
+                      @endforeach
+                      <tr class="bg-light">
+                         <td colspan="5" class="text-right"><strong>Total Semua Item:</strong></td>
+                         <td class="text-right"><strong class="text-success">Rp {{number_format($total_items, 0, ',', '.')}}</strong></td>
+                      </tr>
+                   </tbody>
+                </table>
+             </div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            <a href="/admin/transaksi/edit/{{$data->id}}" class="btn btn-primary">Edit Transaksi</a>
          </div>
       </div>
    </div>
