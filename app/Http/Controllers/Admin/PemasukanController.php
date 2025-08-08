@@ -20,13 +20,9 @@ class PemasukanController extends Controller
             ->join('users', 'pemasukan.id_user', '=', 'users.id')
             ->select('pemasukan.*', 'metode_pembayaran.nama as nama_metode', 'users.name as nama_penginput');
         
-        // Filter tanggal
-        if ($request->filled('start_date')) {
-            $query->where('pemasukan.tanggal', '>=', $request->start_date);
-        }
-        
-        if ($request->filled('end_date')) {
-            $query->where('pemasukan.tanggal', '<=', $request->end_date);
+        // Filter tanggal sederhana
+        if ($request->filled('filter_date')) {
+            $query->where('pemasukan.tanggal', $request->filter_date);
         }
         
         $pemasukan = $query->orderBy('pemasukan.id','DESC')->get();

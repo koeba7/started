@@ -36,7 +36,7 @@
             <label>Tanggal<span class="text-danger">*</span></label>
             <input type="date" autofocus name="tanggal" required class="form-control">
          </div>
-         <div class="form-group">
+         <!-- <div class="form-group">
             <label>Data Barang<span class="text-danger">*</span></label>
             <select name="id_barang" required class="form-control select2">
                <option value="">Pilih Data Barang</option>
@@ -44,7 +44,7 @@
                <option value="{{$item->id}}">{{$item->nama}} ({{$item->nama_kategori}} - {{$item->nama_jenis}}) - Rp {{number_format($item->harga, 0, ',', '.')}}</option>
                @endforeach
             </select>
-         </div>
+         </div> -->
          <div class="form-group">
             <label>Keterangan<span class="text-danger">*</span></label>
             <textarea name="keterangan" required class="form-control" rows="3" placeholder="Masukkan Keterangan ....."></textarea>

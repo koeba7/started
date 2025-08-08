@@ -24,13 +24,9 @@ class PengeluaranController extends Controller
             ->select('pengeluaran.*', 'metode_pembayaran.nama as nama_metode', 'users.name as nama_penginput', 
                     'barang.nama as nama_barang', 'barang.harga as harga_barang', 'kategori.nama as nama_kategori', 'jenis.nama as nama_jenis');
         
-        // Filter tanggal
-        if ($request->filled('start_date')) {
-            $query->where('pengeluaran.tanggal', '>=', $request->start_date);
-        }
-        
-        if ($request->filled('end_date')) {
-            $query->where('pengeluaran.tanggal', '<=', $request->end_date);
+        // Filter tanggal sederhana
+        if ($request->filled('filter_date')) {
+            $query->where('pengeluaran.tanggal', $request->filter_date);
         }
         
         $pengeluaran = $query->orderBy('pengeluaran.id','DESC')->get();

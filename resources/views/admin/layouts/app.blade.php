@@ -372,6 +372,7 @@
 							<ul class="submenu">
 								<li><a href="/admin/kategori" class="@if ($activePage == 'kategori') active @endif">Data Kategori</a></li>
 								<li><a href="/admin/jenis" class="@if ($activePage == 'jenis') active @endif">Data Jenis</a></li>
+								<li><a href="/admin/metode" class="@if ($activePage == 'metode') active @endif">Data Metode</a></li>
 								<li><a href="/admin/metode-pembayaran" class="@if ($activePage == 'metode_pembayaran') active @endif">Metode Pembayaran</a></li>
 								<!-- <li><a href="/admin/barang" class="@if ($activePage == 'barang') active @endif">Data Barang</a></li> -->
 								<!-- <a href="/admin/pemasukan" class="dropdown-toggle no-arrow @if ($activePage == 'pemasukan') active @endif">
@@ -397,6 +398,15 @@
 							<a href="/admin/pengeluaran" class="dropdown-toggle no-arrow @if ($activePage == 'pengeluaran') active @endif">
 								<span class="micon dw dw-shopping-cart"></span><span class="mtext">Pengeluaran</span>
 							</a>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class="micon dw dw-shopping-bag"></span><span class="mtext">Transaksi</span>
+							</a>
+							<ul class="submenu">
+								<li><a href="/admin/transaksi" class="@if ($activePage == 'transaksi') active @endif">Data Transaksi</a></li>
+								<li><a href="/admin/detail-transaksi" class="@if ($activePage == 'detail_transaksi') active @endif">Detail Transaksi</a></li>
+							</ul>
 						</li>
 						
 					</ul>
